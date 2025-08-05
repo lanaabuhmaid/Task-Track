@@ -1,0 +1,82 @@
+<main class="pt-24 pl-72 pr-8 pb-8 bg-gradient-to-br from-white via-teal-50 to-white min-h-screen">
+  <!-- Cards Section -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <!-- Total Tasks -->
+    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+      <p class="text-gray-500 text-sm">Total Tasks</p>
+      <h2 class="text-3xl font-bold text-teal-700 mt-2">12</h2>
+    </div>
+
+    <!-- Completed Tasks -->
+    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+      <p class="text-gray-500 text-sm">Completed Tasks</p>
+      <h2 class="text-3xl font-bold text-teal-700 mt-2">8</h2>
+    </div>
+
+    <!-- Hours Worked -->
+    <div class="bg-white p-6 rounded-lg shadow-md text-center">
+      <p class="text-gray-500 text-sm">Hours Worked</p>
+      <h2 class="text-3xl font-bold text-teal-700 mt-2">32</h2>
+    </div>
+  </div>
+
+  <!-- Lower Section: Overview + Attendance -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Tasks Overview -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+  <p class="text-lg font-semibold text-gray-700 mb-4">Tasks Overview</p>
+
+  <div class="flex items-center justify-center gap-6">
+    <!-- The Circle -->
+    <svg class="w-24 h-24" viewBox="0 0 100 100">
+      <circle
+        class="text-gray-200"
+        stroke-width="10"
+        stroke="currentColor"
+        fill="transparent"
+        r="40"
+        cx="50"
+        cy="50"
+      />
+      <circle
+        class="text-teal-600"
+        stroke-width="10"
+        stroke-dasharray="251.2"
+        stroke-dashoffset="62.8"
+        stroke-linecap="round"
+        stroke="currentColor"
+        fill="transparent"
+        r="40"
+        cx="50"
+        cy="50"
+      />
+    </svg>
+
+    <!-- The text to the Circle -->
+    <div class="text-center">
+      <p class="text-xl font-semibold text-gray-700">3 / 12</p>
+      <p class="text-sm text-gray-500">Completed</p>
+    </div>
+  </div>
+</div>
+
+    <!-- Attendance Table -->
+    <div class="bg-white p-6 rounded-lg shadow-md">
+      <p class="text-lg font-semibold text-gray-700 mb-4">Today's Attendance</p>
+      <table class="w-full text-left border-t border-gray-200">
+        <thead>
+          <tr class="text-gray-500 text-sm">
+            <th class="py-2">Employee</th>
+            <th class="py-2">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-t">
+            <td class="py-3 font-medium text-gray-800">Lana</td>
+            <td class="py-3 text-green-600 font-semibold">Present</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>

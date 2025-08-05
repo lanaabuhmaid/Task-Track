@@ -1,0 +1,53 @@
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-900 via-blue-900 to-gray-900 px-4">
+  <div class="bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl rounded-2xl w-full max-w-lg p-10 space-y-10">
+
+    <!-- Title -->
+    <h2 class="text-center text-white text-2xl font-bold tracking-[0.3em] uppercase">
+      LOGIN
+    </h2>
+
+    <!-- Form -->
+    <form [formGroup]="form" (ngSubmit)="onLogin()" class="space-y-6">
+
+      <div class="flex items-center bg-gray-800 rounded-lg px-4 py-3 shadow-sm focus-within:ring-2 focus-within:ring-teal-400">
+        <svg class="w-5 h-5 text-white mr-3" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v0a2 2 0 01-2 2H4a2 2 0 01-2-2V5z" />
+          <path d="M2 9a2 2 0 012-2h12a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V9z" />
+        </svg>
+        <input
+          formControlName="employeeId"
+          type="text"
+          placeholder="ID"
+          class="w-full bg-transparent text-white placeholder-gray-400 focus:outline-none"
+        />
+      </div>
+
+      <!-- Password Field -->
+      <div class="flex items-center bg-gray-800 rounded-lg px-4 py-3 shadow-sm focus-within:ring-2 focus-within:ring-teal-400">
+        <svg class="w-5 h-5 text-white mr-3" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v2H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-1V6a4 4 0 00-4-4zm-2 6V6a2 2 0 114 0v2H8z" clip-rule="evenodd" />
+        </svg>
+        <input
+          formControlName="password"
+          type="password"
+          placeholder="Password"
+          class="w-full bg-transparent text-white placeholder-gray-400 focus:outline-none"
+        />
+      </div>
+
+      <!-- Forgot Password -->
+      <div class="text-right">
+        <a href="#" class="text-sm text-gray-300 hover:underline">Forgot Password?</a>
+      </div>
+
+      <!-- Login Button -->
+      <button
+        type="submit" (click)="onLogin()"
+        class="w-full py-2 bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white font-semibold tracking-widest rounded-md transition-all duration-200"
+      >
+        LOGIN
+      </button>
+    </form>
+
+  </div>
+</div>
