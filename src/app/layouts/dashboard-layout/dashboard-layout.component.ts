@@ -10,6 +10,9 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './dashboard-layout.component.html'
 })
 export class DashboardLayoutComponent {
+  constructor() {
+    console.log('📦 Dashboard loaded');
+  }
   role = 'employee'; // مؤقتا
   userName = 'Lana'; // مؤقتا
 }
