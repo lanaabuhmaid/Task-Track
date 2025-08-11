@@ -30,20 +30,20 @@ export class LoginPageComponent implements OnInit {
 }
 
 
-  onSubmit(): void {
-    if (this.form.valid) {
-      const loginReq = this.form.value;
+  // onSubmit(): void {
+  //   if (this.form.valid) {
+  //     const loginReq = this.form.value;
 
-      this.authService.login(loginReq).subscribe({
-        next: (response) => {
-          localStorage.setItem('token', response.token);
-          this.router.navigate(['/dashboard']);
-        },
-        error: (err) => {
-          console.error('Login failed:', err);
-        },
-      });
-    }
-  }
+  //     this.authService.login(loginReq).subscribe({
+  //       next: (response) => {
+  //         localStorage.setItem('token', response.token);
+  //         this.router.navigate(['/dashboard']);
+  //       },
+  //       error: (err) => {
+  //         console.error('Login failed:', err);
+  //       },
+  //     });
+  //   }
+  // }
 }
 

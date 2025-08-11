@@ -1,0 +1,133 @@
+<div class="container pt-24 pl-72 pr-8 pb-8 bg-gradient-to-br">
+  <!-- Header Section -->
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+    <div>
+      <h2 class="text-2xl md:text-3xl font-bold text-gray-800">Task Board</h2>
+      <p class="text-gray-600">View and update your tasks</p>
+    </div>
+  </div>
+
+  <!-- Tasks Table -->
+<div class="overflow-x-auto bg-white rounded-lg shadow">
+
+<table class="min-w-full divide-y divide-gray-200">
+  <thead class="bg-gray-50">
+    <tr>
+      <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">#</th>
+      <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Title</th>
+      <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Employee ID</th>
+      <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Due Date</th>
+      <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Description</th>
+      <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Upload Task</th>
+      <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Status</th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200">
+    <tr *ngFor="let task of tasks; let i = index" class="hover:bg-gray-50 transition-colors">
+      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ i + 1 }}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium">{{ task.title }}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ task.employeeId }}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ task.dueDate | date }}</td>
+      <td class="px-6 py-4 text-sm text-gray-500">
+  <button (click)="viewDescription(task)" class="flex items-center gap-2 bg-green-200 hover:bg-green-100 text-green-800 px-1 py-1 rounded-lg shadow transition-colors">
+    View Description
+  </button>
+</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+        <div *ngIf="!task.file">
+          <input type="file" (change)="onFileSelected($event, task)" class="hidden" #fileInput>
+          <button (click)="fileInput.click()" class="flex items-center gap-2 bg-green-200 hover:bg-green-100 text-green-800 px-3 py-2 rounded-lg shadow transition-colors">
+            Upload
+          </button>
+        </div>
+        <div *ngIf="task.file" class="flex items-center">
+          <span class="text-green-600 mr-2">Uploaded</span>
+          <button (click)="viewFile(task)" class="flex items-center gap-2 bg-green-200 hover:bg-green-100 text-green-800 px-3 py-2 rounded-lg shadow transition-colors">
+            View
+          </button>
+        </div>
+      </td>
+      <td class="px-3 py-2 whitespace-nowrap">
+        <select [(ngModel)]="task.status" (change)="updateStatus(task)"
+          class="text-sm border px-2 py-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500
+              bg-opacity-50
+              {{ task.status === 'Pending' ? 'bg-amber-100 text-amber-800' : '' }}
+              {{ task.status === 'In Progress' ? 'bg-blue-100 text-blue-800' : '' }}
+              {{ task.status === 'Completed' ? 'bg-green-100 text-green-800' : '' }}
+              w-auto max-w-[120px] truncate hover:max-w-none focus:max-w-none">
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+    </select>
+</td>
+    </tr>
+  </tbody>
+</table>
+
+  <!-- Empty State -->
+  <div *ngIf="tasks.length === 0" class="text-center py-12">
+    <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+    </svg>
+    <h3 class="mt-2 text-lg font-medium text-gray-900">No tasks assigned</h3>
+    <p class="mt-1 text-gray-500">You have no tasks to display.</p>
+  </div>
+
+  <!-- Description Modal -->
+  <div *ngIf="selectedTask" class="fixed inset-0 z-50 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+
+
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+            {{ selectedTask.title }} - Description
+          </h3>
+          <div class="bg-gray-50 p-4 rounded-md">
+            <p class="text-gray-700 whitespace-pre-line">{{ selectedTask.description || 'No description provided' }}</p>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button
+            type="button"
+            (click)="selectedTask = null"
+            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-600 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="selectedFile" class="fixed inset-0 z-50 overflow-y-auto">
+  <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+    </div>
+
+    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <h3 class="text-lg leading-6 font-medium text-gray-900 mb-4">
+          View Uploaded File
+        </h3>
+        <div class="mb-4">
+          <p class="font-medium">File Name: {{ selectedFile.name }}</p>
+          <p class="text-sm text-gray-500">Size: {{ selectedFile.size / 1024 | number:'1.0-2' }} KB</p>
+        </div>
+        <div class="flex justify-center">
+          <iframe *ngIf="isPdf(selectedFile)" [src]="getSafeUrl(selectedFile)" width="100%" height="500px"></iframe>
+          <img *ngIf="isImage(selectedFile)" [src]="getSafeUrl(selectedFile)" class="max-h-96 mx-auto">
+          <div *ngIf="!isPdf(selectedFile) && !isImage(selectedFile)" class="p-4 bg-gray-100 rounded">
+            <p>File preview not available. Please download the file to view it.</p>
+            <a [href]="getSafeUrl(selectedFile)" download class="text-blue-500 hover:text-blue-700">Download File</a>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <button (click)="selectedFile = null" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-teal-600 text-base font-medium text-white hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 sm:ml-3 sm:w-auto sm:text-sm">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -28,7 +28,17 @@ export const routes: Routes = [
       {
         path: '',
         loadComponent: () =>
-          import('./features/dashboard/dashboard.component').then((m) => m.DashboardComponent),
+          import('./features/dashboard/dashboards/dashboard.component').then((m) => m.DashboardComponent),
+      },
+      {
+        path: 'tasks',
+        loadComponent: () =>
+          import('./features/dashboard/tasks/tasks.component').then(m => m.TasksComponent)
+      },
+      {
+        path: 'add-tasks',
+        loadComponent: () =>
+          import('./features/dashboard/add-tasks/add-tasks.component').then(m => m.AddTasksComponent)
       }
     ]
   },
