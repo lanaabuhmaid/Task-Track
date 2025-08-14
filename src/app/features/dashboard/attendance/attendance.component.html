@@ -1,0 +1,60 @@
+<div class="p-6 ml-64 text-white min-h-screen bg-gradient-to-br via-gray-100">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Attendance</h1>
+    <input type="date" class="bg-teal-600 text-white p-2 rounded" />
+  </div>
+
+  <!-- Statistics -->
+  <div class="grid grid-cols-3 gap-4 mb-6">
+    <div class="bg-green-700 p-4 rounded-lg shadow-lg text-center">
+      <p class="text-lg">Present</p>
+      <p class="text-2xl font-bold">12</p>
+    </div>
+    <div class="bg-red-700 p-4 rounded-lg shadow-lg text-center">
+      <p class="text-lg">Absent</p>
+      <p class="text-2xl font-bold">3</p>
+    </div>
+    <div class="bg-yellow-600 p-4 rounded-lg shadow-lg text-center">
+      <p class="text-lg">Late</p>
+      <p class="text-2xl font-bold">2</p>
+    </div>
+  </div>
+
+  <!-- attendance table -->
+  <div class="overflow-x-auto bg-white rounded-lg shadow-lg text-gray-900 leading-6 font-semibold ">
+    <table class="w-full text-left border-collapse">
+      <thead>
+        <tr class="bg-teal-600 text-white">
+          <th class="p-3">Employee Name</th>
+          <th class="p-3">Check-in</th>
+          <th class="p-3">Check-out</th>
+          <th class="p-3">Total Hours</th>
+          <th class="p-3">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-b border-gray-200 hover:bg-gray-50 text-gray-900 text-sm font-medium">
+          <td class="p-3">Lana Ahmad</td>
+          <td class="p-3">09:05 AM</td>
+          <td class="p-3">04:30 PM</td>
+          <td class="p-3">7h 25m</td>
+          <td class="p-3 text-green-400 font-bold">Present</td>
+        </tr>
+        <tr class="border-b border-gray-200 hover:bg-gray-50 text-gray-900 text-sm font-medium">
+          <td class="p-3">Omar Khaled</td>
+          <td class="p-3">-</td>
+          <td class="p-3">-</td>
+          <td class="p-3">0h</td>
+          <td class="p-3 text-red-400 font-bold">Absent</td>
+        </tr>
+        <tr class="hover:bg-gray-50 text-gray-900 text-sm font-medium">
+          <td class="p-3">Sara Hussein</td>
+          <td class="p-3">10:30 AM</td>
+          <td class="p-3">05:00 PM</td>
+          <td class="p-3">6h 30m</td>
+          <td class="p-3 text-yellow-400 font-bold">Late</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

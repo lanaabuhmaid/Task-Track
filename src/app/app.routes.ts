@@ -39,6 +39,21 @@ export const routes: Routes = [
         path: 'add-tasks',
         loadComponent: () =>
           import('./features/dashboard/add-tasks/add-tasks.component').then(m => m.AddTasksComponent)
+      },
+      {
+        path: 'team-members',
+        loadComponent: () =>
+          import('./features/dashboard/team-members/team-members.component').then(m => m.TeamMembersComponent)
+      },
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./features/dashboard/profile/profile.component').then(m => m.ProfileComponent)
+      },
+      {
+        path: 'attendance',
+        loadComponent: () =>
+          import('./features/dashboard/attendance/attendance.component').then(m => m.AttendanceComponent)
       }
     ]
   },
