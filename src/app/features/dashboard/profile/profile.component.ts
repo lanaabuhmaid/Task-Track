@@ -10,7 +10,6 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  // Signals بدل المتغيرات العادية
   name = signal('Lana Ahmad');
   role = signal('Web Developer');
   email = signal('lana@example.com');
