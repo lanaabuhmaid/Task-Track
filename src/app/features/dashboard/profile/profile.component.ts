@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -10,19 +10,19 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  name: string = 'Lana Ahmad';
-  role: string = 'Web Developer';
-  email: string = 'lana@example.com';
-  profileImage: string | ArrayBuffer | null = 'assets/defaultImage.jpg';
+  // Signals بدل المتغيرات العادية
+  name = signal('Lana Ahmad');
+  role = signal('Web Developer');
+  email = signal('lana@example.com');
+  profileImage = signal<string | ArrayBuffer | null>('assets/defaultImage.jpg');
 
-  // Edit state
-  editMode: boolean = false;
-  selectedFile: File | null = null;
+  editMode = signal(false);
+  selectedFile = signal<File | null>(null);
 
   toggleEditMode() {
-    this.editMode = !this.editMode;
-    if (!this.editMode) {
-      this.selectedFile = null;
+    this.editMode.update((mode) => !mode);
+    if (!this.editMode()) {
+      this.selectedFile.set(null);
     }
   }
 
@@ -35,10 +35,11 @@ export class ProfileComponent {
         return;
       }
 
-      this.selectedFile = file;
+      this.selectedFile.set(file);
+
       const reader = new FileReader();
       reader.onload = (e) => {
-        this.profileImage = e.target?.result as string;
+        this.profileImage.set(e.target?.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -46,16 +47,16 @@ export class ProfileComponent {
 
   // Save profile changes
   saveProfile() {
-    if (this.selectedFile) {
-      console.log('File to upload:', this.selectedFile);
+    if (this.selectedFile()) {
+      console.log('File to upload:', this.selectedFile());
     }
 
     console.log('Profile saved:', {
-      name: this.name,
-      role: this.role,
-      email: this.email
+      name: this.name(),
+      role: this.role(),
+      email: this.email()
     });
 
-    this.editMode = false;
+    this.editMode.set(false);
   }
 }

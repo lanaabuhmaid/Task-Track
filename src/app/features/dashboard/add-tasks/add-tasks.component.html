@@ -100,14 +100,13 @@
             </div>
 
             <div>
-              <label for="employeeId" class="block text-sm font-medium text-gray-700">Employee ID *</label>
-              <input
-                type="text"
-                id="employeeId"
-                [(ngModel)]="newTask.employeeId"
-                class="mt-1 focus:ring-emerald-500 focus:border-emerald-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md border p-2"
-                placeholder="Enter employee ID"
-                required>
+              <!-- Employee Drop-down -->
+            <label class="block mb-2 font-medium">Assign to Employee</label>
+            <select
+              [(ngModel)]="newTask.employeeId"
+                class="w-full p-2 mb-4 rounded border border-gray-300">
+              <option value="" disabled selected>Select Employee</option>
+              <option *ngFor="let emp of employees()" [value]="emp">{{ emp }}</select>
             </div>
 
             <div>

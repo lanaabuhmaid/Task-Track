@@ -6,12 +6,12 @@
         <div class="relative group">
           <img
             class="w-32 h-32 rounded-full shadow-lg object-cover transition-all duration-300"
-            [src]="profileImage"
+            [src]="profileImage()"
             alt="Profile picture"
-            [class.group-hover:brightness-75]="editMode"
+            [class.group-hover:brightness-75]="editMode()"
           />
           <!-- Image upload button (only visible when editing) -->
-          <div *ngIf="editMode" class="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-md">
+          <div *ngIf="editMode()" class="absolute bottom-0 right-0 bg-white p-2 rounded-full shadow-md">
             <label class="cursor-pointer">
               <input type="file" accept="image/*" class="hidden" (change)="onFileSelected($event)">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,12 +26,12 @@
 
     <!-- Profile content -->
     <div class="pt-20 px-6 pb-6 text-center">
-      <h1 class="text-2xl font-bold text-gray-800">{{ name }}</h1>
-      <p class="text-teal-600 font-medium">{{ role }}</p>
+      <h1 class="text-2xl font-bold text-gray-800">{{ name() }}</h1>
+      <p class="text-teal-600 font-medium">{{ role() }}</p>
 
       <div class="mt-4">
-        <a [href]="'mailto:' + email" class="text-gray-600 hover:text-teal-600 transition-colors">
-          {{ email }}
+        <a [href]="'mailto:' + email()" class="text-gray-600 hover:text-teal-600 transition-colors">
+          {{ email() }}
         </a>
       </div>
 
@@ -40,17 +40,18 @@
         (click)="toggleEditMode()"
         class="mt-6 px-6 py-2 bg-teal-600 text-white rounded-lg shadow hover:bg-teal-600 transition-all"
       >
-        {{ editMode ? 'Cancel' : 'Edit Profile' }}
+        {{ editMode() ? 'Cancel' : 'Edit Profile' }}
       </button>
     </div>
 
     <!-- Edit form (shown only when editing) -->
-    <div *ngIf="editMode" class="px-6 pb-6">
+    <div *ngIf="editMode()" class="px-6 pb-6">
       <div class="space-y-4">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
           <input
-            [(ngModel)]="name"
+            [ngModel]="name()"
+            (ngModelChange)="name.set($event)"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-400"
             type="text"
             placeholder="Enter your name"
@@ -60,7 +61,8 @@
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
           <input
-            [(ngModel)]="role"
+            [ngModel]="role()"
+            (ngModelChange)="role.set($event)"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
             type="text"
             placeholder="Enter your job title"
@@ -70,7 +72,8 @@
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
           <input
-            [(ngModel)]="email"
+            [ngModel]="email()"
+            (ngModelChange)="email.set($event)"
             class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
             type="email"
             placeholder="Enter your email"

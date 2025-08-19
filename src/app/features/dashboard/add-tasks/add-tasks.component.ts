@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -33,6 +33,14 @@ export class AddTasksComponent implements OnInit {
   selectedTask: Task | null = null;
   selectedFile: any = null;
 
+  // Signal بدل array عادية
+  employees = signal<string[]>([
+    'Ali Ahmad',
+    'Sara Hasan',
+    'Omar Khaled',
+    'Lana Abu-Hmaid'
+  ]);
+
   newTask: Task = {
     title: '',
     employeeId: '',
@@ -52,7 +60,7 @@ export class AddTasksComponent implements OnInit {
       {
         id: 1,
         title: 'Complete project report',
-        employeeId: 'EMP-1001',
+        employeeId: 'Ali Ahmad',
         dueDate: '2025-08-15',
         description: 'Prepare the quarterly project report',
         status: 'Pending',
@@ -66,7 +74,7 @@ export class AddTasksComponent implements OnInit {
       {
         id: 2,
         title: 'Design mockups',
-        employeeId: 'EMP-1002',
+        employeeId: 'Sara Hasan',
         dueDate: '2025-08-12',
         description: 'Create UI mockups for new feature',
         status: 'Completed',
