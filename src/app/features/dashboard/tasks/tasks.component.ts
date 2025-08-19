@@ -7,6 +7,7 @@ interface Task {
   id?: number;
   title: string;
   employeeId: string;
+  employeeName: string;
   dueDate: string;
   description: string;
   status: 'Pending' | 'In Progress' | 'Completed';
@@ -38,6 +39,7 @@ export class TasksComponent implements OnInit {
         id: 1,
         title: 'Complete project report',
         employeeId: 'EMP-1001',
+        employeeName: 'Khaled Ahmad',
         dueDate: '2025-08-15',
         description: 'Prepare the quarterly project report',
         status: 'Pending'
@@ -46,6 +48,7 @@ export class TasksComponent implements OnInit {
         id: 2,
         title: 'Review authentication module',
         employeeId: 'EMP-1002',
+        employeeName: 'Layan Ramiz',
         dueDate: '2025-08-12',
         description: 'Perform code review',
         status: 'In Progress'

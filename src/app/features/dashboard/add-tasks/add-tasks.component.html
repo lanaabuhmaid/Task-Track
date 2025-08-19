@@ -22,7 +22,7 @@
         <tr>
           <th scope="col" class="px-4 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">#</th>
           <th scope="col" class="px-4 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Title</th>
-          <th scope="col" class="px-4 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Employee ID</th>
+          <th scope="col" class="px-4 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Employee Name</th>
           <th scope="col" class="px-4 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Due Date</th>
           <th scope="col" class="px-4 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Description</th>
           <th scope="col" class="px-4 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">File</th>
@@ -34,7 +34,7 @@
         <tr *ngFor="let task of tasks; let i = index" class="hover:bg-gray-50 transition-colors">
           <td class="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">{{ i + 1 }}</td>
           <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-800 font-medium">{{ task.title }}</td>
-          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{{ task.employeeId }}</td>
+          <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{{ getEmployeeName(task.employeeId) }}</td>
           <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500">{{ task.dueDate | date }}</td>
           <td class="px-4 py-3 text-sm text-gray-500">
             <button (click)="viewDescription(task)"
@@ -101,12 +101,11 @@
 
             <div>
               <!-- Employee Drop-down -->
-            <label class="block mb-2 font-medium">Assign to Employee</label>
-            <select
-              [(ngModel)]="newTask.employeeId"
-                class="w-full p-2 mb-4 rounded border border-gray-300">
-              <option value="" disabled selected>Select Employee</option>
-              <option *ngFor="let emp of employees()" [value]="emp">{{ emp }}</select>
+              <label for="employee">Assign To:</label>
+                <select id="employee" [(ngModel)]="newTask.employeeId" name="employeeId" class="border rounded p-2 w-full">
+                <option value="0" disabled>Select Employee</option>
+                <option *ngFor="let emp of employees()" [value]="emp.id">{{ emp.name }}</option>
+              </select>
             </div>
 
             <div>
@@ -158,7 +157,7 @@
           <h3 class="text-lg leading-6 font-medium text-gray-900 mb-2">
             {{ selectedTask.title }}
           </h3>
-          <p class="text-sm text-gray-500 mb-4">Assigned to Employee ID: {{ selectedTask.employeeId }}</p>
+          <p class="text-sm text-gray-500 mb-4">Assigned to Employee Name: {{ selectedTask.employeeName }}</p>
           <div class="bg-gray-50 p-4 rounded-md">
             <h4 class="text-md font-medium text-gray-700 mb-2">Task Description:</h4>
             <p class="text-gray-700 whitespace-pre-line">{{ selectedTask.description }}</p>

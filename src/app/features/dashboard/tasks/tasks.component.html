@@ -15,7 +15,7 @@
     <tr>
       <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">#</th>
       <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Title</th>
-      <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Employee ID</th>
+      <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Employee Name</th>
       <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Due Date</th>
       <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Description</th>
       <th scope="col" class="px-6 py-3 text-left text-xs font-medium bg-teal-600 text-white uppercase tracking-wider">Upload Task</th>
@@ -26,7 +26,7 @@
     <tr *ngFor="let task of tasks; let i = index" class="hover:bg-gray-50 transition-colors">
       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ i + 1 }}</td>
       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 font-medium">{{ task.title }}</td>
-      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ task.employeeId }}</td>
+      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ task.employeeName }}</td>
       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ task.dueDate | date }}</td>
       <td class="px-6 py-4 text-sm text-gray-500">
   <button (click)="viewDescription(task)" class="flex items-center gap-2 bg-green-200 hover:bg-green-100 text-green-800 px-1 py-1 rounded-lg shadow transition-colors">
