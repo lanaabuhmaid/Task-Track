@@ -1,3 +1,9 @@
+enum Status {
+  Pending = 'Pending',
+  InProgress = 'In Progress',
+  Completed = 'Completed'
+}
+
 import { Component, OnInit, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -9,14 +15,14 @@ interface Task {
   title: string;
   employeeId: number;
   employeeName: string;
-  dueDate: string;
+  dueDate: string ;
   description: string;
-  status: 'Pending' | 'In Progress' | 'Completed';
+  status: Status;
   uploadedFile?: {
     name: string;
     url: string;
     type: string;
-    size: number;
+    size: number | undefined;
   };
 }
 
@@ -44,7 +50,7 @@ export class AddTasksComponent implements OnInit {
     employeeName: "",
     dueDate: new Date().toISOString().split('T')[0],
     description: '',
-    status: 'Pending'
+    status: Status.Pending
   };
 
   constructor(private sanitizer: DomSanitizer, private teamService: TeamMembersService) {}
@@ -67,7 +73,7 @@ export class AddTasksComponent implements OnInit {
         employeeName: "Khaled Ahmad",
         dueDate: '2025-08-15',
         description: 'Prepare the quarterly project report',
-        status: 'Pending',
+        status: Status.Pending,
         uploadedFile: {
           name: 'mockups.zip',
           url: 'assets/sample.zip',
@@ -82,7 +88,7 @@ export class AddTasksComponent implements OnInit {
         employeeName: "Layan Ramiz",
         dueDate: '2025-08-12',
         description: 'Create UI mockups for new feature',
-        status: 'Completed',
+        status: Status.Completed,
         uploadedFile: {
           name: 'mockups.zip',
           url: 'assets/sample.zip',
@@ -176,7 +182,7 @@ export class AddTasksComponent implements OnInit {
       employeeName: "",
       dueDate: new Date().toISOString().split('T')[0],
       description: '',
-      status: 'Pending'
+      status: Status.Pending
     };
   }
 }

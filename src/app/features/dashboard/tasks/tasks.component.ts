@@ -11,8 +11,37 @@ interface Task {
   dueDate: string;
   description: string;
   status: 'Pending' | 'In Progress' | 'Completed';
+}
+
+// Interface ثاني للملفات
+interface FileAttachment {
   file?: File;
   fileUrl?: string;
+}
+
+// مثال على Intersection Types
+type TaskWithFile = Task & FileAttachment;
+
+class TaskModel implements TaskWithFile {
+  constructor(
+    public id: number,
+    public title: string,
+    public employeeId: string,
+    public employeeName: string,
+    public dueDate: string,
+    public description: string,
+    public status: 'Pending' | 'In Progress' | 'Completed',
+    public file?: File,
+    public fileUrl?: string
+  ) {}
+
+  updateStatus(newStatus: 'Pending' | 'In Progress' | 'Completed') {
+    this.status = newStatus;
+  }
+
+  getSummary(): string {
+    return `${this.title} - Assigned to ${this.employeeName} (Due: ${this.dueDate})`;
+  }
 }
 
 @Component({
@@ -23,8 +52,8 @@ interface Task {
   styleUrls: ['./tasks.component.css']
 })
 export class TasksComponent implements OnInit {
-  tasks: Task[] = [];
-  selectedTask: Task | null = null;
+  tasks: TaskModel[] = [];
+  selectedTask: TaskModel | null = null;
   selectedFile: {name: string, size: number, url: SafeUrl} | null = null;
 
   constructor(private sanitizer: DomSanitizer) {}
@@ -35,32 +64,32 @@ export class TasksComponent implements OnInit {
 
   loadSampleTasks() {
     this.tasks = [
-      {
-        id: 1,
-        title: 'Complete project report',
-        employeeId: 'EMP-1001',
-        employeeName: 'Khaled Ahmad',
-        dueDate: '2025-08-15',
-        description: 'Prepare the quarterly project report',
-        status: 'Pending'
-      },
-      {
-        id: 2,
-        title: 'Review authentication module',
-        employeeId: 'EMP-1002',
-        employeeName: 'Layan Ramiz',
-        dueDate: '2025-08-12',
-        description: 'Perform code review',
-        status: 'In Progress'
-      }
-    ];
+      new TaskModel(
+        1,
+        'Complete project report',
+        'EMP-1001',
+        'Khaled Ahmad',
+        '2025-08-15',
+        'Prepare the quarterly project report',
+        'Pending'
+      ),
+      new TaskModel(
+        2,
+        'Review authentication module',
+        'EMP-1002',
+        'Layan Ramiz',
+        '2025-08-12',
+        'Perform code review',
+        'In Progress'
+
+    )];
   }
 
-  viewDescription(task: Task) {
+  viewDescription(task: TaskModel) {
     this.selectedTask = task;
   }
 
-  onFileSelected(event: any, task: Task) {
+  onFileSelected(event: any, task: TaskModel) {
     const file: File = event.target.files[0];
     if (file) {
       task.file = file;
@@ -69,7 +98,7 @@ export class TasksComponent implements OnInit {
     }
   }
 
-  viewFile(task: Task) {
+  viewFile(task: TaskModel) {
     if (task.file && task.fileUrl) {
       this.selectedFile = {
         name: task.file.name,
